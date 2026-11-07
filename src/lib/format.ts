@@ -21,3 +21,15 @@ export function formatRate(value: number): string {
     ? value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     : value.toFixed(4);
 }
+
+/** A change with its sign, in the same precision as rates: "+1.2000", "−0.5000", "+1,523.50", "0.00". Uses a real minus sign. */
+export function formatSigned(value: number): string {
+  if (value === 0) return formatRate(0).replace(/^0\.0+$/, "0.00");
+  return `${value > 0 ? "+" : "−"}${formatRate(Math.abs(value))}`;
+}
+
+/** A percentage with its sign: "+0.07%", "−1.25%". */
+export function formatPercent(value: number): string {
+  if (value === 0) return "0.00%";
+  return `${value > 0 ? "+" : "−"}${Math.abs(value).toFixed(2)}%`;
+}

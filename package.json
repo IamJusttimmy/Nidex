@@ -12,6 +12,9 @@
     "quality:report": "tsx scripts/quality-report.ts"
   },
   "dependencies": {
+    "d3-array": "^3.2.5",
+    "d3-scale": "^4.0.3",
+    "d3-shape": "^3.2.1",
     "next": "16.4.4",
     "papaparse": "^5.7.0",
     "react": "19.3.0",
@@ -21,6 +24,9 @@
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
+    "@types/d3-array": "^3.2.2",
+    "@types/d3-scale": "^4.0.9",
+    "@types/d3-shape": "^3.2.0",
     "@types/node": "^24.19.2",
     "@types/papaparse": "^5.5.2",
     "@types/react": "^19",

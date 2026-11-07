@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { AboutData } from "@/components/about-data";
 import { listCurrencies } from "@/lib/data/exchange-rates/currencies";
@@ -118,7 +119,12 @@ export function ExchangeRatesView() {
                 {shown.map((c) => (
                   <tr key={c.code} className="border-b border-line last:border-b-0 hover:bg-brand-soft/60">
                     <th scope="row" className="px-3 py-3.5 font-normal sm:px-6">
-                      <span className="font-semibold">{c.name}</span>{" "}
+                      <Link
+                        href={`/exchange-rates/${c.code}`}
+                        className="font-semibold underline-offset-3 hover:underline"
+                      >
+                        {c.name}
+                      </Link>{" "}
                       <span className="ml-1 font-mono text-xs text-muted sm:ml-2">{c.code}</span>
                       <span className="mt-0.5 block text-xs text-muted sm:hidden">
                         {formatDate(c.date)}
