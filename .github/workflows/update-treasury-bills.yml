@@ -1,0 +1,100 @@
+name: Update Treasury bills data
+
+# Downloads the CBN Treasury bills (NTB) feed, checks it with the Nidex checker and, only if the checked data
+# differs from the published file, commits public/data/treasury-bills/latest.json.
+# A failed download, a failed check or a failed test stops the run before anything is committed.
+
+on:
+  schedule:
+    # Every day at 17:17 UTC (18:17 in Lagos). GitHub may start it a few minutes late.
+    - cron: "17 17 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Check everything but publish nothing (use this to test the connection to CBN)"
+        type: boolean
+        default: false
+      allow_regression:
+        description: "Accept a download with fewer records or an older newest auction than the published file"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Never run two updates at once.
+concurrency:
+  group: update-treasury-bills
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # If someone breaks the checker, no new data is published until it is fixed.
+      - name: Run the Treasury bills tests
+        run: npx vitest run src/lib/data/treasury-bills
+
+      - name: Download, check and publish
+        shell: bash
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+          ALLOW_REGRESSION: ${{ inputs.allow_regression }}
+        run: |
+          set -o pipefail
+          args=()
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          if [ "$ALLOW_REGRESSION" = "true" ]; then args+=(--allow-regression); fi
+          npx tsx scripts/fetch-ntb.ts "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/publish.log"
+
+      - name: Show what happened
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "### Treasury bills update"
+            echo '```'
+            cat "$RUNNER_TEMP/publish.log" 2>/dev/null || echo "The script did not run."
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check that only the data file changed
+        shell: bash
+        run: |
+          others=$(git status --porcelain -- . ':!public/data/treasury-bills/latest.json')
+          if [ -n "$others" ]; then
+            echo "::error::Files other than the data file changed:"
+            echo "$others"
+            exit 1
+          fi
+
+      - name: Commit the data if it changed
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
+        shell: bash
+        run: |
+          file=public/data/treasury-bills/latest.json
+          if [ -z "$(git status --porcelain -- "$file")" ]; then
+            echo "No change in $file. Nothing to commit."
+            exit 0
+          fi
+          newest=$(node -p "require('./$file').source.lastAuctionDate")
+          count=$(node -p "require('./$file').source.recordCount")
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$file"
+          git commit -m "data: update Treasury bills (newest auction $newest, $count records)"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
