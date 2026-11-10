@@ -71,9 +71,11 @@ describe("loadTreasuryBills", () => {
       observations?: {
         auctionDate: unknown;
         rate: unknown;
+        trueYield: unknown;
+        raw: { trueYield?: unknown };
         tenor: { group: unknown };
         rateLabel: { raw?: unknown };
-        quality: { rate?: { status: unknown } };
+        quality: { rate?: { status: unknown }; trueYield?: { status: unknown } };
       }[];
       amounts: { unit: unknown };
       source: { fetchedAt: unknown };
@@ -88,6 +90,9 @@ describe("loadTreasuryBills", () => {
       "a tenor group of 120": (d) => (d.observations![0]!.tenor.group = 120),
       "a missing rate assessment": (d) => delete d.observations![0]!.quality.rate,
       "an unknown quality status": (d) => (d.observations![0]!.quality.rate!.status = "fine"),
+      "a true yield that is text": (d) => (d.observations![0]!.trueYield = "16.0"),
+      "a missing original true yield text": (d) => delete d.observations![0]!.raw.trueYield,
+      "a missing true yield assessment": (d) => delete d.observations![0]!.quality.trueYield,
       "a label with no raw text": (d) => delete d.observations![0]!.rateLabel.raw,
       "a confirmed amount unit": (d) => (d.amounts.unit = "millions-of-naira"),
       "an unreadable fetch time": (d) => (d.source.fetchedAt = "yesterday"),

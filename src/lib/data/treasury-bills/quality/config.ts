@@ -1,4 +1,4 @@
-import type { NtbField, TenorGroupDays } from "./types";
+import type { NtbField, RawTextField, ReasonCode, RejectionKind, TenorGroupDays, WarningCode } from "./types";
 
 export interface TenorGroup {
   /** The standard bill: 91, 182 or 364 days. */
@@ -96,3 +96,73 @@ export const AMOUNT_USAGE_POLICY = {
   totalsAndSums: "not-allowed",
   comparisonsAcrossRecords: "not-allowed",
 } as const;
+
+/** Plain names for the judged fields, for display. */
+export const FIELD_LABELS: Record<NtbField, string> = {
+  auctionDate: "Auction date",
+  tenor: "Tenor",
+  maturityDate: "Maturity date",
+  rate: "Rate",
+  rateLabel: "Rate label",
+  trueYield: "True yield",
+  rangeBid: "Range of bids",
+  successfulBidRates: "Successful bids",
+  amtOffered: "Amount offered",
+  totalSubscription: "Total subscription",
+  totalSuccessful: "Total successful",
+};
+
+/** Which field of the CBN record holds the published text for each judged field. */
+export const RAW_KEY_OF_FIELD = {
+  auctionDate: "auctionDate",
+  tenor: "tenor",
+  maturityDate: "maturityDate",
+  rate: "rate",
+  rateLabel: "rateDescription",
+  trueYield: "trueYield",
+  rangeBid: "rangeBid",
+  successfulBidRates: "successfulBidRates",
+  amtOffered: "amtOffered",
+  totalSubscription: "totalSubscription",
+  totalSuccessful: "totalSuccessful",
+} as const satisfies Record<NtbField, RawTextField>;
+
+/** The judged fields that hold amounts. Their unit is unconfirmed (see AMOUNT_USAGE_POLICY). */
+export const AMOUNT_FIELDS: readonly NtbField[] = ["amtOffered", "totalSubscription", "totalSuccessful"];
+
+/** One short name per rule, for display. Every rule code must have one (the type enforces it). */
+export const REASON_TITLES: Record<ReasonCode, string> = {
+  not_published_empty: "CBN left the value empty",
+  not_published_zero: "CBN wrote zero where zero cannot be a real value",
+  unparseable: "Not a readable value",
+  negative_value: "Negative value",
+  tenor_label_variant: "Tenor written as a variant, such as 363 days",
+  tenor_not_standard: "Not a standard 91, 182 or 364-day tenor",
+  maturity_not_after_auction: "Maturity date is not after the auction date",
+  maturity_inconsistent_with_tenor: "Maturity date does not fit the tenor",
+  rate_implausible: "Value too high to be real",
+  rate_outside_bid_range: "Rate outside the published range of bids",
+  rate_spike_reversion: "Rate jumps for one auction, then returns",
+  rate_label_standardised: "Label spelling standardised",
+  rate_label_unrecognised: "Label not recognised",
+  true_yield_inconsistent_with_rate: "True yield differs from what the rate implies",
+  bid_rate_implausible: "Bid rate too high to be real",
+  bid_range_reversed: "Range of bids written backwards",
+  bid_range_single_value: "One rate given instead of a range",
+  successful_range_outside_bid_range: "Successful bids outside the range of all bids",
+  allotment_exceeds_subscription: "More allotted than was subscribed",
+  amount_scale_inconsistent: "Amounts on very different scales within one record",
+};
+
+export const WARNING_TITLES: Record<WarningCode, string> = {
+  rate_differs_from_top_successful_bid: "Rate differs from the highest successful bid",
+  conflicting_duplicate_auction: "Another record for the same auction has different values",
+};
+
+export const REJECTION_TITLES: Record<RejectionKind, string> = {
+  not_an_object: "Not a record",
+  invalid_id: "Missing or invalid id",
+  duplicate_id: "Id used by another record",
+  security_type_not_ntb: "Not a Treasury bill",
+  duplicate_content: "Exact repeat of another record",
+};
