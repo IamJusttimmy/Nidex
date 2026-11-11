@@ -6,11 +6,11 @@
     "name": "Central Bank of Nigeria",
     "endpoint": "https://www.cbn.gov.ng/api/GetAllSecuritiesNTB",
     "origin": "network",
-    "fetchedAt": "2026-11-08T22:54:47.843Z",
-    "recordCount": 1824,
-    "contentSha256": "1e95e8d3bd19338fa3820350732fd9ddd0685636c34cc3c487182e921583d9f4",
+    "fetchedAt": "2026-11-11T23:30:26.417Z",
+    "recordCount": 1826,
+    "contentSha256": "1161068890d75ecfa5fb5302180a386145a8387190bd8146eee0b520a5735891",
     "firstAuctionDate": "2002-01-03",
-    "lastAuctionDate": "2026-11-04"
+    "lastAuctionDate": "2026-11-11"
   },
   "amounts": {
     "unit": "unconfirmed",
@@ -83,87 +83,87 @@
     }
   },
   "summary": {
-    "sourceRecords": 1824,
-    "observations": 1823,
+    "sourceRecords": 1826,
+    "observations": 1825,
     "rejected": 1,
     "recordsByWorstStatus": {
-      "valid": 1600,
+      "valid": 1602,
       "suspicious": 178,
       "invalid": 45
     },
     "byField": {
       "auctionDate": {
-        "valid": 1823,
+        "valid": 1825,
         "suspicious": 0,
         "invalid": 0,
         "notPublished": 0,
         "unparseable": 0
       },
       "tenor": {
-        "valid": 1819,
+        "valid": 1821,
         "suspicious": 4,
         "invalid": 0,
         "notPublished": 0,
         "unparseable": 0
       },
       "maturityDate": {
-        "valid": 1703,
+        "valid": 1705,
         "suspicious": 109,
         "invalid": 11,
         "notPublished": 0,
         "unparseable": 0
       },
       "rate": {
-        "valid": 1821,
+        "valid": 1823,
         "suspicious": 2,
         "invalid": 0,
         "notPublished": 22,
         "unparseable": 0
       },
       "rateLabel": {
-        "valid": 1823,
+        "valid": 1825,
         "suspicious": 0,
         "invalid": 0,
         "notPublished": 0,
         "unparseable": 0
       },
       "trueYield": {
-        "valid": 1806,
+        "valid": 1808,
         "suspicious": 17,
         "invalid": 0,
-        "notPublished": 464,
+        "notPublished": 466,
         "unparseable": 0
       },
       "rangeBid": {
-        "valid": 1809,
+        "valid": 1811,
         "suspicious": 0,
         "invalid": 14,
         "notPublished": 1,
         "unparseable": 11
       },
       "successfulBidRates": {
-        "valid": 1792,
+        "valid": 1794,
         "suspicious": 9,
         "invalid": 22,
         "notPublished": 1,
         "unparseable": 11
       },
       "amtOffered": {
-        "valid": 1816,
+        "valid": 1818,
         "suspicious": 7,
         "invalid": 0,
         "notPublished": 11,
         "unparseable": 0
       },
       "totalSubscription": {
-        "valid": 1765,
+        "valid": 1767,
         "suspicious": 58,
         "invalid": 0,
         "notPublished": 1,
         "unparseable": 0
       },
       "totalSuccessful": {
-        "valid": 1765,
+        "valid": 1767,
         "suspicious": 58,
         "invalid": 0,
         "notPublished": 2,
@@ -175,9 +175,9 @@
         "field": "trueYield",
         "code": "not_published_zero",
         "status": "valid",
-        "records": 464,
+        "records": 466,
         "firstDate": "2007-05-04",
-        "lastDate": "2026-11-04",
+        "lastDate": "2026-11-11",
         "sampleIds": [
           901,
           1883,
@@ -2409,9 +2409,11 @@
     {"id":7892,"raw":{"id":7892,"auctionDate":"October-28-2026","securityType":"NTB","tenor":"364DAY","auctionNo":"28-10-2026 364Day","auction":"Primary Market","week":"5th Week","maturityDate":"October-28-2027","totalSubscription":"1836141.5400","totalSuccessful":"38376.7590","rangeBid":"15.0000 - 18.2400","successfulBidRates":"15.0000 - 15.8000","rateDescription":"Issue","rate":"15.8000","trueYield":"0.0000","amtOffered":"600000.0000","totalAmtRepaid":"0.0000","netType":"Sales","netValue":"38376.7590"},"auctionDate":"2026-10-28","maturityDate":"2027-10-28","daysToMaturity":365,"tenor":{"rawText":"364DAY","labelDays":364,"group":364},"rate":15.8,"rateLabel":{"raw":"Issue","display":"Issue"},"trueYield":null,"rangeBid":{"low":15,"high":18.24},"successfulBidRates":{"low":15,"high":15.8},"amtOffered":600000,"totalSubscription":1836141.54,"totalSuccessful":38376.759,"amountUnit":"unconfirmed","quality":{"auctionDate":{"status":"valid","presence":"published","reasons":[]},"tenor":{"status":"valid","presence":"published","reasons":[]},"maturityDate":{"status":"valid","presence":"published","reasons":[]},"rate":{"status":"valid","presence":"published","reasons":[]},"rateLabel":{"status":"valid","presence":"published","reasons":[]},"trueYield":{"status":"valid","presence":"not-published","reasons":[{"code":"not_published_zero","message":"CBN wrote 0.0000 for the true yield. Nidex treats this as \"not published\", not as a value of zero.","detail":{"raw":"0.0000"}}]},"rangeBid":{"status":"valid","presence":"published","reasons":[]},"successfulBidRates":{"status":"valid","presence":"published","reasons":[]},"amtOffered":{"status":"valid","presence":"published","reasons":[]},"totalSubscription":{"status":"valid","presence":"published","reasons":[]},"totalSuccessful":{"status":"valid","presence":"published","reasons":[]}},"warnings":[]},
     {"id":7898,"raw":{"id":7898,"auctionDate":"November-04-2026","securityType":"NTB","tenor":"91DAY","auctionNo":"04-11-2026 91DAY","auction":"Primary Market","week":"1st Week","maturityDate":"February-04-2027","totalSubscription":"25010.9220","totalSuccessful":"22395.2720","rangeBid":"15.0000– 16.1500","successfulBidRates":"15.0000 - 15.4000","rateDescription":"Issue","rate":"15.4000","trueYield":"0.0000","amtOffered":"100000.0000","totalAmtRepaid":"0.0000","netType":"Sales","netValue":"22395.2720"},"auctionDate":"2026-11-04","maturityDate":"2027-02-04","daysToMaturity":92,"tenor":{"rawText":"91DAY","labelDays":91,"group":91},"rate":15.4,"rateLabel":{"raw":"Issue","display":"Issue"},"trueYield":null,"rangeBid":{"low":15,"high":16.15},"successfulBidRates":{"low":15,"high":15.4},"amtOffered":100000,"totalSubscription":25010.922,"totalSuccessful":22395.272,"amountUnit":"unconfirmed","quality":{"auctionDate":{"status":"valid","presence":"published","reasons":[]},"tenor":{"status":"valid","presence":"published","reasons":[]},"maturityDate":{"status":"valid","presence":"published","reasons":[]},"rate":{"status":"valid","presence":"published","reasons":[]},"rateLabel":{"status":"valid","presence":"published","reasons":[]},"trueYield":{"status":"valid","presence":"not-published","reasons":[{"code":"not_published_zero","message":"CBN wrote 0.0000 for the true yield. Nidex treats this as \"not published\", not as a value of zero.","detail":{"raw":"0.0000"}}]},"rangeBid":{"status":"valid","presence":"published","reasons":[]},"successfulBidRates":{"status":"valid","presence":"published","reasons":[]},"amtOffered":{"status":"valid","presence":"published","reasons":[]},"totalSubscription":{"status":"valid","presence":"published","reasons":[]},"totalSuccessful":{"status":"valid","presence":"published","reasons":[]}},"warnings":[]},
     {"id":7899,"raw":{"id":7899,"auctionDate":"November-04-2026","securityType":"NTB","tenor":"182DAY","auctionNo":"04-11-2026 182DAY","auction":"Primary Market","week":"1st Week","maturityDate":"May-06-2027","totalSubscription":"25829.6340","totalSuccessful":"25169.6320","rangeBid":"15.4000– 16.5000","successfulBidRates":"15.4000 - 15.7900","rateDescription":"Issue","rate":"15.7900","trueYield":"0.0000","amtOffered":"100000.0000","totalAmtRepaid":"0.0000","netType":"Sales","netValue":"25169.6320"},"auctionDate":"2026-11-04","maturityDate":"2027-05-06","daysToMaturity":183,"tenor":{"rawText":"182DAY","labelDays":182,"group":182},"rate":15.79,"rateLabel":{"raw":"Issue","display":"Issue"},"trueYield":null,"rangeBid":{"low":15.4,"high":16.5},"successfulBidRates":{"low":15.4,"high":15.79},"amtOffered":100000,"totalSubscription":25829.634,"totalSuccessful":25169.632,"amountUnit":"unconfirmed","quality":{"auctionDate":{"status":"valid","presence":"published","reasons":[]},"tenor":{"status":"valid","presence":"published","reasons":[]},"maturityDate":{"status":"valid","presence":"published","reasons":[]},"rate":{"status":"valid","presence":"published","reasons":[]},"rateLabel":{"status":"valid","presence":"published","reasons":[]},"trueYield":{"status":"valid","presence":"not-published","reasons":[{"code":"not_published_zero","message":"CBN wrote 0.0000 for the true yield. Nidex treats this as \"not published\", not as a value of zero.","detail":{"raw":"0.0000"}}]},"rangeBid":{"status":"valid","presence":"published","reasons":[]},"successfulBidRates":{"status":"valid","presence":"published","reasons":[]},"amtOffered":{"status":"valid","presence":"published","reasons":[]},"totalSubscription":{"status":"valid","presence":"published","reasons":[]},"totalSuccessful":{"status":"valid","presence":"published","reasons":[]}},"warnings":[]},
-    {"id":7900,"raw":{"id":7900,"auctionDate":"November-04-2026","securityType":"NTB","tenor":"364DAY","auctionNo":"04-11-2026 364DAY","auction":"Primary Market","week":"1st Week","maturityDate":"November-04-2027","totalSubscription":"1994159.2880","totalSuccessful":"461836.2870","rangeBid":"15.0000– 18.1800","successfulBidRates":"15.0000 - 15.8000","rateDescription":"Issue","rate":"15.8000","trueYield":"0.0000","amtOffered":"600000.0000","totalAmtRepaid":"0.0000","netType":"Sales","netValue":"461836.2870"},"auctionDate":"2026-11-04","maturityDate":"2027-11-04","daysToMaturity":365,"tenor":{"rawText":"364DAY","labelDays":364,"group":364},"rate":15.8,"rateLabel":{"raw":"Issue","display":"Issue"},"trueYield":null,"rangeBid":{"low":15,"high":18.18},"successfulBidRates":{"low":15,"high":15.8},"amtOffered":600000,"totalSubscription":1994159.288,"totalSuccessful":461836.287,"amountUnit":"unconfirmed","quality":{"auctionDate":{"status":"valid","presence":"published","reasons":[]},"tenor":{"status":"valid","presence":"published","reasons":[]},"maturityDate":{"status":"valid","presence":"published","reasons":[]},"rate":{"status":"valid","presence":"published","reasons":[]},"rateLabel":{"status":"valid","presence":"published","reasons":[]},"trueYield":{"status":"valid","presence":"not-published","reasons":[{"code":"not_published_zero","message":"CBN wrote 0.0000 for the true yield. Nidex treats this as \"not published\", not as a value of zero.","detail":{"raw":"0.0000"}}]},"rangeBid":{"status":"valid","presence":"published","reasons":[]},"successfulBidRates":{"status":"valid","presence":"published","reasons":[]},"amtOffered":{"status":"valid","presence":"published","reasons":[]},"totalSubscription":{"status":"valid","presence":"published","reasons":[]},"totalSuccessful":{"status":"valid","presence":"published","reasons":[]}},"warnings":[]}
+    {"id":7900,"raw":{"id":7900,"auctionDate":"November-04-2026","securityType":"NTB","tenor":"364DAY","auctionNo":"04-11-2026 364DAY","auction":"Primary Market","week":"1st Week","maturityDate":"November-04-2027","totalSubscription":"1994159.2880","totalSuccessful":"461836.2870","rangeBid":"15.0000– 18.1800","successfulBidRates":"15.0000 - 15.8000","rateDescription":"Issue","rate":"15.8000","trueYield":"0.0000","amtOffered":"600000.0000","totalAmtRepaid":"0.0000","netType":"Sales","netValue":"461836.2870"},"auctionDate":"2026-11-04","maturityDate":"2027-11-04","daysToMaturity":365,"tenor":{"rawText":"364DAY","labelDays":364,"group":364},"rate":15.8,"rateLabel":{"raw":"Issue","display":"Issue"},"trueYield":null,"rangeBid":{"low":15,"high":18.18},"successfulBidRates":{"low":15,"high":15.8},"amtOffered":600000,"totalSubscription":1994159.288,"totalSuccessful":461836.287,"amountUnit":"unconfirmed","quality":{"auctionDate":{"status":"valid","presence":"published","reasons":[]},"tenor":{"status":"valid","presence":"published","reasons":[]},"maturityDate":{"status":"valid","presence":"published","reasons":[]},"rate":{"status":"valid","presence":"published","reasons":[]},"rateLabel":{"status":"valid","presence":"published","reasons":[]},"trueYield":{"status":"valid","presence":"not-published","reasons":[{"code":"not_published_zero","message":"CBN wrote 0.0000 for the true yield. Nidex treats this as \"not published\", not as a value of zero.","detail":{"raw":"0.0000"}}]},"rangeBid":{"status":"valid","presence":"published","reasons":[]},"successfulBidRates":{"status":"valid","presence":"published","reasons":[]},"amtOffered":{"status":"valid","presence":"published","reasons":[]},"totalSubscription":{"status":"valid","presence":"published","reasons":[]},"totalSuccessful":{"status":"valid","presence":"published","reasons":[]}},"warnings":[]},
+    {"id":7908,"raw":{"id":7908,"auctionDate":"November-11-2026","securityType":"NTB","tenor":"182DAY","auctionNo":"11-11-2026 182DAY","auction":"Primary Market","week":"2nd Week","maturityDate":"May-13-2027","totalSubscription":"23017.4380","totalSuccessful":"22282.4370","rangeBid":"15.0000 - 18.0000","successfulBidRates":"15.0000 - 15.7900","rateDescription":"Issue","rate":"15.7900","trueYield":"0.0000","amtOffered":"100000.0000","totalAmtRepaid":"0.0000","netType":"Sales","netValue":"22282.4370"},"auctionDate":"2026-11-11","maturityDate":"2027-05-13","daysToMaturity":183,"tenor":{"rawText":"182DAY","labelDays":182,"group":182},"rate":15.79,"rateLabel":{"raw":"Issue","display":"Issue"},"trueYield":null,"rangeBid":{"low":15,"high":18},"successfulBidRates":{"low":15,"high":15.79},"amtOffered":100000,"totalSubscription":23017.438,"totalSuccessful":22282.437,"amountUnit":"unconfirmed","quality":{"auctionDate":{"status":"valid","presence":"published","reasons":[]},"tenor":{"status":"valid","presence":"published","reasons":[]},"maturityDate":{"status":"valid","presence":"published","reasons":[]},"rate":{"status":"valid","presence":"published","reasons":[]},"rateLabel":{"status":"valid","presence":"published","reasons":[]},"trueYield":{"status":"valid","presence":"not-published","reasons":[{"code":"not_published_zero","message":"CBN wrote 0.0000 for the true yield. Nidex treats this as \"not published\", not as a value of zero.","detail":{"raw":"0.0000"}}]},"rangeBid":{"status":"valid","presence":"published","reasons":[]},"successfulBidRates":{"status":"valid","presence":"published","reasons":[]},"amtOffered":{"status":"valid","presence":"published","reasons":[]},"totalSubscription":{"status":"valid","presence":"published","reasons":[]},"totalSuccessful":{"status":"valid","presence":"published","reasons":[]}},"warnings":[]},
+    {"id":7909,"raw":{"id":7909,"auctionDate":"November-11-2026","securityType":"NTB","tenor":"364DAY","auctionNo":"11-11-2026 364DAY","auction":"Primary Market","week":"2nd Week","maturityDate":"November-11-2027","totalSubscription":"1079100.7050","totalSuccessful":"672905.7040","rangeBid":"15.0000 - 18.5000","successfulBidRates":"15.0000 - 15.8900","rateDescription":"Issue","rate":"15.8900","trueYield":"0.0000","amtOffered":"600000.0000","totalAmtRepaid":"0.0000","netType":"Sales","netValue":"672905.7040"},"auctionDate":"2026-11-11","maturityDate":"2027-11-11","daysToMaturity":365,"tenor":{"rawText":"364DAY","labelDays":364,"group":364},"rate":15.89,"rateLabel":{"raw":"Issue","display":"Issue"},"trueYield":null,"rangeBid":{"low":15,"high":18.5},"successfulBidRates":{"low":15,"high":15.89},"amtOffered":600000,"totalSubscription":1079100.705,"totalSuccessful":672905.704,"amountUnit":"unconfirmed","quality":{"auctionDate":{"status":"valid","presence":"published","reasons":[]},"tenor":{"status":"valid","presence":"published","reasons":[]},"maturityDate":{"status":"valid","presence":"published","reasons":[]},"rate":{"status":"valid","presence":"published","reasons":[]},"rateLabel":{"status":"valid","presence":"published","reasons":[]},"trueYield":{"status":"valid","presence":"not-published","reasons":[{"code":"not_published_zero","message":"CBN wrote 0.0000 for the true yield. Nidex treats this as \"not published\", not as a value of zero.","detail":{"raw":"0.0000"}}]},"rangeBid":{"status":"valid","presence":"published","reasons":[]},"successfulBidRates":{"status":"valid","presence":"published","reasons":[]},"amtOffered":{"status":"valid","presence":"published","reasons":[]},"totalSubscription":{"status":"valid","presence":"published","reasons":[]},"totalSuccessful":{"status":"valid","presence":"published","reasons":[]}},"warnings":[]}
   ],
   "rejected": [
-    {"index":469,"id":3921,"kind":"duplicate_content","message":"Identical to record 3920 in every field except id. The first is kept.","raw":{"id":3921,"auctionDate":"March-17-2021","securityType":"NTB","tenor":"182DAY","auctionNo":"03-17-2021 182DAY","auction":"Primary Market","week":"3rd Week","maturityDate":"September-16-2021","totalSubscription":"10631.9770","totalSuccessful":"5913.1880","rangeBid":"3.0000-9.0000","successfulBidRates":"3.0000-3.5000","rateDescription":"Issue","rate":"3.5000","trueYield":"3.5622","amtOffered":"8385.1960","totalAmtRepaid":"0.0000","netType":"Purchases","netValue":"5913.1880"}}
+    {"index":471,"id":3921,"kind":"duplicate_content","message":"Identical to record 3920 in every field except id. The first is kept.","raw":{"id":3921,"auctionDate":"March-17-2021","securityType":"NTB","tenor":"182DAY","auctionNo":"03-17-2021 182DAY","auction":"Primary Market","week":"3rd Week","maturityDate":"September-16-2021","totalSubscription":"10631.9770","totalSuccessful":"5913.1880","rangeBid":"3.0000-9.0000","successfulBidRates":"3.0000-3.5000","rateDescription":"Issue","rate":"3.5000","trueYield":"3.5622","amtOffered":"8385.1960","totalAmtRepaid":"0.0000","netType":"Purchases","netValue":"5913.1880"}}
   ]
 }
