@@ -195,7 +195,11 @@ async function main() {
   if (fs.existsSync(OUT_PATH)) {
     try {
       const existing = JSON.parse(fs.readFileSync(OUT_PATH, "utf-8"));
-      existingObservations = existing.observations ?? [];
+      existingObservations = (existing.observations ?? []).filter(
+        (observation) =>
+          /^\d{4}-\d{2}-\d{2}$/.test(observation.reportingDate) &&
+          observation.reportingDate !== "0000-00-00",
+      );
       const existingDates = new Set(existingObservations.map((o) => o.reportingDate));
       if (existingDates.has(latest.reportingDate)) {
         // Date already present — but still re-fetch in case the file was corrected.
@@ -220,6 +224,12 @@ async function main() {
     parseResult.warnings.forEach((w) => console.warn("  !", w));
   }
   console.log(`Parsed ${parseResult.rows.length} fund rows for ${parseResult.reportingDate}`);
+
+  if (parseResult.reportingDate !== latest.reportingDate) {
+    throw new Error(
+      `Parsed reporting date ${parseResult.reportingDate} does not match filename date ${latest.reportingDate}`,
+    );
+  }
 
   if (parseResult.rows.length === 0) {
     console.error("No fund rows parsed — aborting");

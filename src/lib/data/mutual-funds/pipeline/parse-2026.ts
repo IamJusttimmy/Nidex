@@ -36,18 +36,20 @@ function excelSerialToDate(serial: number): string {
   return new Date(ms).toISOString().slice(0, 10);
 }
 
-/** Parse ordinal date string like "23rd October 2026" → "2026-10-23" */
+/** Parse dates like "23rd October 2026" or "October 23, 2026" → "2026-10-23". */
 function parseOrdinalDate(text: string): string | null {
   const months: Record<string, string> = {
     january: "01", february: "02", march: "03", april: "04",
     may: "05", june: "06", july: "07", august: "08",
     september: "09", october: "10", november: "11", december: "12",
   };
-  const m = text.match(/(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)\s+(\d{4})/i);
+  const m = text.match(
+    /(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)\s+(\d{4})|([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})/i,
+  );
   if (!m) return null;
-  const day = m[1].padStart(2, "0");
-  const month = months[m[2].toLowerCase()];
-  const year = m[3];
+  const day = (m[1] ?? m[5]).padStart(2, "0");
+  const month = months[(m[2] ?? m[4]).toLowerCase()];
+  const year = m[3] ?? m[6];
   if (!month) return null;
   return `${year}-${month}-${day}`;
 }
