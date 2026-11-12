@@ -11,6 +11,8 @@ import {
   type MfChartField,
 } from "@/lib/data/mutual-funds-site/series";
 import type { MfObservationSite } from "@/lib/data/mutual-funds-site/schema";
+import { NtbRateChart } from "@/components/ntb-rate-chart";
+import type { RateSeriesPoint } from "@/lib/data/treasury-bills/series";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -202,10 +204,58 @@ function ChartSection({ observations }: { observations: MfObservationSite[] }) {
     [observations, selectedFund, selectedField],
   );
 
-  const validPoints = useMemo(
-    () => series?.points.filter((p) => p.value !== null) ?? [],
-    [series],
+  const fieldLabel = useMemo(
+    () => MF_CHART_FIELD_OPTIONS.find((o) => o.key === selectedField)?.label ?? selectedField,
+    [selectedField],
   );
+
+  // Adapt MfFundSeriesPoint[] → RateSeriesPoint[] for NtbRateChart
+  const { lines, flagged } = useMemo(() => {
+    if (!series) return { lines: [], flagged: [] };
+
+    let id = 0;
+    const validPts: RateSeriesPoint[] = [];
+    const suspiciousPts: RateSeriesPoint[] = [];
+
+    for (const pt of series.points) {
+      if (pt.value === null) continue;
+      const rsp: RateSeriesPoint = {
+        id: id++,
+        date: pt.reportingDate,
+        rate: pt.value,
+        rawLabel: selectedFund,
+        displayLabel: fieldLabel,
+        rawTenor: fieldLabel,
+        rateStatus: "valid",
+        rateReasons: [],
+        warnings: [],
+      };
+      validPts.push(rsp);
+    }
+
+    // suspicious points (value is non-null but status was suspicious)
+    for (const obs of observations) {
+      if (obs.fundName !== selectedFund) continue;
+      const assessment = obs.fields[selectedField];
+      if (assessment.status !== "suspicious" || assessment.value === null) continue;
+      suspiciousPts.push({
+        id: id++,
+        date: obs.reportingDate,
+        rate: assessment.value,
+        rawLabel: selectedFund,
+        displayLabel: fieldLabel,
+        rawTenor: fieldLabel,
+        rateStatus: "suspicious",
+        rateReasons: [{ code: "rate_implausible", message: `Nidex flagged this ${fieldLabel} value as suspicious.` }],
+        warnings: [],
+      });
+    }
+
+    return {
+      lines: validPts.length > 0 ? [{ tenor: 364 as const, points: validPts }] : [],
+      flagged: suspiciousPts.length > 0 ? [{ tenor: 364 as const, points: suspiciousPts }] : [],
+    };
+  }, [series, observations, selectedFund, selectedField, fieldLabel]);
 
   return (
     <section className="mb-12">
@@ -245,21 +295,11 @@ function ChartSection({ observations }: { observations: MfObservationSite[] }) {
         </div>
       </div>
 
-      {validPoints.length === 0 ? (
-        <p className="text-sm text-[var(--color-text-muted)]">
-          No data available for this fund and metric.
-        </p>
-      ) : (
-        <div className="text-sm text-[var(--color-text-muted)]">
-          {/* Chart placeholder — wire up NtbRateChart or a d3 chart in a follow-up */}
-          <p className="mb-2">
-            {validPoints.length} week{validPoints.length !== 1 ? "s" : ""} of data
-            from {formatDate(validPoints[0].reportingDate)} to{" "}
-            {formatDate(validPoints[validPoints.length - 1].reportingDate)}.
-          </p>
-          <p className="italic">Chart coming soon.</p>
-        </div>
-      )}
+      <NtbRateChart
+        lines={lines}
+        flagged={flagged}
+        labelName={`${selectedFund} — ${fieldLabel}`}
+      />
     </section>
   );
 }
