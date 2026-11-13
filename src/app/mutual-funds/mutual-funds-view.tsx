@@ -13,6 +13,7 @@ import {
 import type { MfObservationSite } from "@/lib/data/mutual-funds-site/schema";
 import { NtbRateChart } from "@/components/ntb-rate-chart";
 import type { RateSeriesPoint } from "@/lib/data/treasury-bills/series";
+import { NotesSection } from "@/components/notes-section";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -389,39 +390,32 @@ function QualitySection({ observations }: { observations: MfObservationSite[] })
 
 function AboutSection() {
   return (
-    <section className="mb-12 text-sm text-[var(--color-text-muted)] space-y-3 max-w-2xl">
-      <h2 className="text-lg font-semibold text-[var(--color-text)] mb-3">About this data</h2>
-      <p>
-        <strong className="text-[var(--color-text)]">Source.</strong>{" "}
-        Securities and Exchange Commission of Nigeria (SEC), weekly NAV archive for
-        Collective Investment Schemes (CIS). Published every Friday.
-      </p>
-      <p>
-        <strong className="text-[var(--color-text)]">Coverage.</strong>{" "}
-        Files are available from 2011. Each weekly file covers all funds registered
-        with the SEC at that date. The number of funds grows over time as new schemes
-        are registered.
-      </p>
-      <p>
-        <strong className="text-[var(--color-text)]">Format changes.</strong>{" "}
-        Files from 2011 contain only NAV (₦) and unit price (₦) for each fund, with
-        no category groupings. Later files (2026 format) add fund manager, category,
-        USD NAV, bid and offer prices, unitholders, and weekly and year-to-date yields.
-        Nidex preserves both formats and marks which fields are absent for older data.
-      </p>
-      <p>
-        <strong className="text-[var(--color-text)]">Data preservation.</strong>{" "}
-        Nidex reproduces what the SEC published. Where a value is zero or appears
-        inconsistent, it is flagged as suspicious rather than removed. The original
-        published figure is always shown.
-      </p>
-      <p>
-        <strong className="text-[var(--color-text)]">Update frequency.</strong>{" "}
-        The pipeline checks for a new file each weekday morning and adds the new week
-        when found. If the SEC corrects or replaces a weekly file, that week&apos;s
-        records are refreshed on the next run.
-      </p>
-    </section>
+    <NotesSection
+      id="about-heading"
+      title="About this data"
+      notes={[
+        {
+          term: "Source",
+          body: "Securities and Exchange Commission of Nigeria (SEC), weekly NAV archive for Collective Investment Schemes (CIS). Published every Friday.",
+        },
+        {
+          term: "Coverage",
+          body: "Files are available from 2011. Each weekly file covers all funds registered with the SEC at that date. The number of funds grows over time as new schemes are registered.",
+        },
+        {
+          term: "Format changes",
+          body: "Files from 2011 contain only NAV (₦) and unit price (₦) for each fund, with no category groupings. Later files (2026 format) add fund manager, category, USD NAV, bid and offer prices, unitholders, and weekly and year-to-date yields. Nidex preserves both formats and marks which fields are absent for older data.",
+        },
+        {
+          term: "Data preservation",
+          body: "Nidex reproduces what the SEC published. Where a value is zero or appears inconsistent, it is flagged as suspicious rather than removed. The original published figure is always shown.",
+        },
+        {
+          term: "Update frequency",
+          body: "The pipeline checks for a new file each weekday morning and adds the new week when found. If the SEC corrects or replaces a weekly file, that week's records are refreshed on the next run.",
+        },
+      ]}
+    />
   );
 }
 
