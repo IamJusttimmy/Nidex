@@ -2,6 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { Search, X } from "lucide-react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -98,7 +105,6 @@ function score(result: SearchResult, query: string): number {
   if (sublabel.includes(q)) return 40;
   if (dataset.includes(q)) return 20;
 
-  // token matching — all query words must appear somewhere
   const words = q.split(" ").filter(Boolean);
   const haystack = `${label} ${sublabel} ${dataset}`;
   if (words.every((w) => haystack.includes(w))) return 10;
@@ -119,10 +125,10 @@ function search(index: SearchResult[], query: string): SearchResult[] {
 // ── Dataset badge colours ─────────────────────────────────────────────────────
 
 const BADGE_STYLES: Record<Dataset, string> = {
-  "exchange-rates":  "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-300",
-  "money-market":    "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
-  "treasury-bills":  "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
-  "mutual-funds":    "bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300",
+  "exchange-rates": "bg-sky-100 text-sky-800",
+  "money-market":   "bg-emerald-100 text-emerald-800",
+  "treasury-bills": "bg-amber-100 text-amber-800",
+  "mutual-funds":   "bg-violet-100 text-violet-800",
 };
 
 // ── Components ────────────────────────────────────────────────────────────────
@@ -131,13 +137,13 @@ function ResultItem({ result }: { result: SearchResult }) {
   return (
     <Link
       href={result.href}
-      className="flex items-start justify-between gap-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 hover:border-[var(--color-brand)] hover:bg-[var(--color-surface-raised)] transition-colors group"
+      className="flex items-start justify-between gap-4 rounded-lg border border-line bg-surface px-4 py-3 hover:border-brand hover:bg-brand-soft transition-colors group"
     >
       <div className="min-w-0">
-        <div className="text-sm font-medium group-hover:text-[var(--color-brand)] transition-colors">
+        <div className="text-sm font-medium group-hover:text-brand transition-colors">
           {result.label}
         </div>
-        <div className="text-xs text-[var(--color-text-muted)] mt-0.5">
+        <div className="text-xs text-muted mt-0.5">
           {result.sublabel}
         </div>
       </div>
@@ -156,7 +162,6 @@ export default function HomePage() {
   const [index, setIndex] = useState<SearchResult[]>(STATIC_INDEX);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Load dynamic index entries once on mount
   useEffect(() => {
     let cancelled = false;
 
@@ -198,55 +203,71 @@ export default function HomePage() {
         <h1 className="text-3xl font-semibold tracking-tight mb-3">
           Nigeria&apos;s financial data, unfiltered.
         </h1>
-        <p className="text-[var(--color-text-muted)] leading-relaxed text-sm">
+        <p className="text-[var(--color-muted)] leading-relaxed text-sm">
           Search across exchange rates, money market indicators, treasury bill
-          auctions, and mutual funds — all sourced directly from CBN and SEC
+          auctions, and mutual funds. All sourced directly from CBN and SEC
           publications.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex gap-2 mb-8">
-        <input
-          ref={inputRef}
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="e.g. USD, MPR, 91-day, Stanbic…"
-          className="flex-1 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-2.5 text-sm placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-brand)] focus:ring-1 focus:ring-[var(--color-brand)]"
-          autoComplete="off"
-          autoFocus
-        />
-        <button
-          type="submit"
-          className="rounded-lg bg-[var(--color-brand)] px-5 py-2.5 text-sm font-medium text-white hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:ring-offset-2"
-        >
-          Search
-        </button>
+      {/* Search */}
+      <form onSubmit={handleSubmit} className="mb-6">
+        <InputGroup className="h-11 rounded-xl border-[var(--color-line)] bg-[var(--color-surface)] focus-within:border-[var(--color-brand)]">
+          <InputGroupAddon align="inline-start">
+            <Search size={15} className="text-muted" />
+          </InputGroupAddon>
+          <InputGroupInput
+            ref={inputRef}
+            value={query}
+            onChange={(e) => {
+              const v = e.target.value;
+              setQuery(v);
+              setSubmitted(v.trim());
+            }}
+            placeholder="Search datasets, rates, funds…"
+            className="text-[var(--color-ink)] placeholder:text-[var(--color-muted)]"
+          />
+          {query && (
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton
+                onClick={() => {
+                  setQuery("");
+                  setSubmitted("");
+                  inputRef.current?.focus();
+                }}
+              >
+                <X size={13} className="text-muted" />
+              </InputGroupButton>
+            </InputGroupAddon>
+          )}
+        </InputGroup>
       </form>
 
+      {/* Results */}
       {submitted && results.length === 0 && (
-        <p className="text-sm text-[var(--color-text-muted)]">
+        <p className="text-sm text-[var(--color-muted)] mb-6">
           No results for <strong>&ldquo;{submitted}&rdquo;</strong>. Try a currency code, rate name, or fund name.
         </p>
       )}
 
       {results.length > 0 && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mb-6">
           {results.map((r, i) => (
             <ResultItem key={`${r.dataset}-${r.label}-${i}`} result={r} />
           ))}
         </div>
       )}
 
+      {/* Suggestions */}
       {!submitted && (
-        <p className="text-xs text-[var(--color-text-muted)]">
+        <p className="text-xs text-[var(--color-muted)]">
           Try searching for{" "}
           {["USD", "MPR", "91-day", "ARM Discovery Fund"].map((term, i, arr) => (
             <span key={term}>
               <button
                 type="button"
                 onClick={() => { setQuery(term); setSubmitted(term); }}
-                className="underline underline-offset-2 hover:text-[var(--color-brand)] transition-colors"
+                className="underline underline-offset-2 hover:text-brand transition-colors"
               >
                 {term}
               </button>
