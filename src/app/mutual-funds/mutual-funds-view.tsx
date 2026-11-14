@@ -95,8 +95,8 @@ function CategoryGroup({
           {category}
         </h3>
       )}
-      <div className="border border-[var(--color-border)] rounded-lg overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
+        <table className="w-full min-w-[480px] text-sm">
           <thead>
             <tr className="border-b border-[var(--color-border)] bg-[var(--color-surface-raised)]">
               <th className="text-left px-4 py-2 font-medium text-[var(--color-text-muted)]">Fund</th>
@@ -353,12 +353,12 @@ function QualitySection({ observations }: { observations: MfObservationSite[] })
           </h3>
           <div className="space-y-1">
             {suspicious.map((item, i) => (
-              <div key={i} className="text-sm font-mono flex gap-3">
+              <div key={i} className="text-sm font-mono flex flex-wrap gap-x-3 gap-y-0.5">
                 <span className="text-[var(--color-text-muted)] w-28 shrink-0">{formatDate(item.reportingDate)}</span>
                 <span className="text-[var(--color-text-muted)] shrink-0">{item.field}</span>
                 <span className="font-medium">{item.raw ?? "—"}</span>
                 <span className="text-[var(--color-text-muted)]">({item.reason})</span>
-                <span className="truncate">{item.fundName}</span>
+                <span className="min-w-0 break-words">{item.fundName}</span>
               </div>
             ))}
           </div>
@@ -372,11 +372,11 @@ function QualitySection({ observations }: { observations: MfObservationSite[] })
           </h3>
           <div className="space-y-1">
             {invalid.map((item, i) => (
-              <div key={i} className="text-sm font-mono flex gap-3">
+              <div key={i} className="text-sm font-mono flex flex-wrap gap-x-3 gap-y-0.5">
                 <span className="text-[var(--color-text-muted)] w-28 shrink-0">{formatDate(item.reportingDate)}</span>
                 <span className="text-[var(--color-text-muted)] shrink-0">{item.field}</span>
                 <span className="font-medium">{item.raw ?? "—"}</span>
-                <span className="truncate">{item.fundName}</span>
+                <span className="min-w-0 break-words">{item.fundName}</span>
               </div>
             ))}
           </div>
@@ -441,7 +441,7 @@ export function MutualFundsView() {
   }
 
   return (
-    <main className="max-w-5xl mx-auto px-4 py-10">
+    <main className="max-w-5xl mx-auto overflow-x-hidden px-4 py-10">
       <div className="mb-10">
         <h1 className="text-2xl font-semibold mb-2">Mutual Funds</h1>
         <p className="text-sm text-[var(--color-text-muted)]">

@@ -40,7 +40,7 @@ export function SiteHeader() {
             <img
               src="/nidex.png"
               alt="Nidex"
-              className="h-40 w-auto"
+              className="h-15 w-auto"
               //  style={{ filter: "brightness(0) saturate(0) contrast(1.2)" }}
               width={120}
               height={120}
