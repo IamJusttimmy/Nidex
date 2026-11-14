@@ -34,9 +34,17 @@ export function SiteHeader() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-[22px] font-bold tracking-tight text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="flex items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            aria-label="Nidex home"
           >
-            nidex
+            <img
+              src="/nidex.png"
+              alt="Nidex"
+              className="h-40 w-auto"
+              //  style={{ filter: "brightness(0) saturate(0) contrast(1.2)" }}
+              width={120}
+              height={120}
+            />
           </Link>
 
           {/* Desktop pill nav */}
