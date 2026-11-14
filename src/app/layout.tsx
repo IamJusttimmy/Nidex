@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   title: { default: "Nidex", template: "%s | Nidex" },
   description:
     "Nigerian exchange rates, money-market rates, Treasury bills and mutual funds from the official publishers.",
+
+  verification: {
+    google: "h8D3KI53CqbHlrubv5LplJgooFc8LrbbTXMMhTCCJes",
+  },
 };
 
 export default function RootLayout({
