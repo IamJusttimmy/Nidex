@@ -2,17 +2,17 @@
   "source": {
     "publisher": "Central Bank of Nigeria",
     "endpoint": "https://www.cbn.gov.ng/api/GetAllMoneyMarketIndicators",
-    "retrievedAt": "2026-11-10T20:24:02.045Z",
+    "retrievedAt": "2026-11-26T17:57:07.985Z",
     "rulesVersion": "2026-11-10.1"
   },
   "coverage": {
     "firstPeriod": "2006-01",
-    "lastPeriod": "2026-09",
-    "totalRecords": 249
+    "lastPeriod": "2026-10",
+    "totalRecords": 250
   },
   "quality": {
-    "totalObservations": 249,
-    "fullyValid": 243,
+    "totalObservations": 250,
+    "fullyValid": 244,
     "withSuspicious": 6,
     "withInvalid": 0,
     "rulesFired": [
@@ -21,9 +21,9 @@
         "description": "MRR is empty from December 2006 onward; MRR was replaced by MPR.",
         "status": "not-published",
         "field": "mrr",
-        "count": 238,
+        "count": 239,
         "firstPeriod": "2006-12",
-        "lastPeriod": "2026-09"
+        "lastPeriod": "2026-10"
       },
       {
         "rule": "mpr_pre_era_zero",
@@ -18258,6 +18258,79 @@
         "maxLending": {
           "raw": "32.62",
           "value": 32.62,
+          "status": "valid",
+          "reason": null
+        }
+      }
+    },
+    {
+      "id": 253,
+      "period": "2026-10",
+      "periodLabel": "October 2026",
+      "rates": {
+        "mpr": {
+          "raw": "23.00",
+          "value": 23,
+          "status": "valid",
+          "reason": null
+        },
+        "mrr": {
+          "raw": "",
+          "value": null,
+          "status": "not-published",
+          "reason": "mrr_post_era_empty"
+        },
+        "interBankCallRate": {
+          "raw": "20.00",
+          "value": 20,
+          "status": "valid",
+          "reason": null
+        },
+        "treasuryBill": {
+          "raw": "15.47",
+          "value": 15.47,
+          "status": "valid",
+          "reason": null
+        },
+        "savingsDeposit": {
+          "raw": "5.35",
+          "value": 5.35,
+          "status": "valid",
+          "reason": null
+        },
+        "oneMonthDeposit": {
+          "raw": "10.69",
+          "value": 10.69,
+          "status": "valid",
+          "reason": null
+        },
+        "threeMonthsDeposit": {
+          "raw": "11.56",
+          "value": 11.56,
+          "status": "valid",
+          "reason": null
+        },
+        "sixMonthsDeposit": {
+          "raw": "10.50",
+          "value": 10.5,
+          "status": "valid",
+          "reason": null
+        },
+        "twelveMonthsDeposit": {
+          "raw": "9.48",
+          "value": 9.48,
+          "status": "valid",
+          "reason": null
+        },
+        "primeLending": {
+          "raw": "18.61",
+          "value": 18.61,
+          "status": "valid",
+          "reason": null
+        },
+        "maxLending": {
+          "raw": "33.11",
+          "value": 33.11,
           "status": "valid",
           "reason": null
         }
